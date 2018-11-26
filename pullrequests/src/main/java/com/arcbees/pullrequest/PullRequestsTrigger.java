@@ -117,6 +117,10 @@ public class PullRequestsTrigger extends PolledBuildTrigger {
     }
 
     private boolean shouldBuildPullRequest(VcsPropertiesHelper vcsPropertiesHelper, PullRequest pullRequest) {
+        if (vcsPropertiesHelper.getBaseBranch() == "*" ) {
+            return true;
+        }
+
         String baseBranch = vcsPropertiesHelper.getBaseBranch();
 
         return Strings.isNullOrEmpty(baseBranch) || pullRequest.getBranchChain().contains(baseBranch);
